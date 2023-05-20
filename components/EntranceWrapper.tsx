@@ -37,7 +37,7 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
   useEffect(() => {
     const handleScroll = () => {
       const element = ref.current;
-      if (!element || typeof window == undefined) return;
+      if (!element) return;
 
       const rect = element.getBoundingClientRect();
       const elementTop = rect.top;
@@ -78,7 +78,7 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
 
 
   return (
-    <div id={id} ref={ref} className={clsx("duration-500", className)}>
+    <div id={id} ref={ref} className={clsx("duration-500", transClass, className)}>
       {children}
     </div>
   )
