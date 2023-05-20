@@ -2,26 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer base {
+  body {
+    @apply bg-themeBlack text-themeWhite font-body;
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+  };
+  h1, h2, h3 {
+    @apply font-title font-medium;
+  };
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .standardContainer {
+    @apply mx-auto w-full max-w-screen-xl;
+    @apply px-8 md:px-20;
+  };
+
+  .glitchTitle {
+    position: relative
   }
+  .glitchTitle:after, .glitchTitle:before {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: attr(data-text);
+  }
+  .glitchTitle:before {
+    @apply text-themeBlue;
+    @apply animate-glitchLeft;
+  }
+  .glitchTitle:after {
+    @apply text-themePink;
+    @apply animate-glitchRight;
+  }
+
+
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+/* fallback for the useVHOverride hook */
+/* :root {
+  --vh: 1vh; 
+} */
