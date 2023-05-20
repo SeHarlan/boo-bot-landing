@@ -1,9 +1,7 @@
 "use client"
 
-import useElementObserver from "@/hooks/useElementObserver";
-import { Transition } from "@headlessui/react";
 import clsx from "clsx";
-import debounce from "lodash.debounce";
+import { type } from "os";
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
 
 export const enteredTransClass = "opacity-100 translate-y-0 scale-100"
@@ -39,7 +37,7 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
   useEffect(() => {
     const handleScroll = () => {
       const element = ref.current;
-      if (!element) return;
+      if (!element || typeof window == undefined) return;
 
       const rect = element.getBoundingClientRect();
       const elementTop = rect.top;
@@ -80,7 +78,7 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
 
 
   return (
-    <div id={id} ref={ref} className={clsx("duration-500", transClass, className)}>
+    <div id={id} ref={ref} className={clsx("duration-500", className)}>
       {children}
     </div>
   )

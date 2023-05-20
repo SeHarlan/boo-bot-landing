@@ -77,7 +77,7 @@ const PixelBG = () => {
   return (
     <div ref={containerRef} className="w-full h-screen fixed top-0 left-0 z-[-1] overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full">
-        <P5Wrapper sketch={sketch} />
+        {/* <P5Wrapper sketch={sketch} /> */}
       </div>
       <div className="flex justify-between items-end mx-auto max-w-screen-2xl w-full h-full md:px-12">
         <div className="flex flex-col items-center">
@@ -104,7 +104,6 @@ const PixelBG = () => {
           <HollowCross className={clsx(className, "[animation-delay:17.2s]")} />
           <Block className={clsx(className, "[animation-delay:19.1s]")} />
         </div>
-
       </div>
     </div>
   )

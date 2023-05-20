@@ -13,12 +13,12 @@ export default function Home() {
       <Testimonials />
       <EntranceWrapper className='standardContainer flex justify-center mb-20'>
         <div className='border-y-2 p-6 border-themePink flex flex-col justify-center items-center gap-8'>
-      <h3 className='font-bold text-3xl'>Discover the Future of Community Building Today</h3>
-      <CTAButton />
+          <h3 className='font-bold text-3xl'>Discover the Future of Community Building Today</h3>
+          <CTAButton />
         </div>
       </EntranceWrapper>
       <FAQ />
-      <div className='h-screen'/>
+      <div className='h-screen' />
     </main>
   )
 }
