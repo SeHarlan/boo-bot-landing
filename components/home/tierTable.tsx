@@ -136,7 +136,9 @@ const TierTable = () => {
           <p>&lt; 7k Users = $149/mo</p>
           <p>&gt; 7k Users = $169/mo</p>
         </TableCell>
-        <TableCell pos="right" />
+        <TableCell pos="right" >
+          <p>Custom proposals to be discussed</p>
+        </TableCell>
 
       </div>
     </div>
