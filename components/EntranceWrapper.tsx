@@ -1,7 +1,6 @@
 "use client"
 
 import clsx from "clsx";
-import { type } from "os";
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
 
 export const enteredTransClass = "opacity-100 translate-y-0 scale-100"
@@ -21,14 +20,16 @@ interface EntranceWrapperProps {
   children: ReactNode,
   id?: string
   className?: string,
-  initTransClass?: string
+  initTransClass?: string;
+  skipMountingScroll?: boolean;
 }
 
 const EntranceWrapper: FC<EntranceWrapperProps> = ({
   children,
   id,
   className,
-  initTransClass = "opacity-0"
+  initTransClass = "opacity-0",
+  skipMountingScroll = false
 }) => { 
   const ref = useRef<HTMLDivElement>(null)
   const prevY = useRef(0)
@@ -69,7 +70,9 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
       prevY.current = elementTop;
     };
 
-    handleScroll()
+    if (!skipMountingScroll) {
+      handleScroll()
+    }
 
     // Attach the scroll event listener
     window.addEventListener('scroll', handleScroll);
@@ -78,7 +81,7 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [ref]);
+  }, []);
 
 
   return (

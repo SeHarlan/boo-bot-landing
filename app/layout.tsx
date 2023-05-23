@@ -39,6 +39,7 @@ const avenir = localFont({
 export const metadata: Metadata = {
   title: 'Boo Bot',
   description: 'Next Gen Web3 services for your Discord server',
+
 }
 
 export default function RootLayout({
