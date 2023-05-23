@@ -2,15 +2,17 @@
 
 import { Block, Cross, Grid, HollowCross, LongCross } from "@/svg/pixelElements";
 import clsx from "clsx";
-import P5Wrapper from "./P5Wrapper";
 import { memo, useRef } from "react";
 import type p5 from "p5";
 import debounce from "lodash.debounce";
+import dynamic from "next/dynamic";
+const P5Wrapper = dynamic(() => import('./P5Wrapper'), { ssr: false });
 
 const PixelBG = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const sketch = (p: p5) => {
+    if (typeof window === "undefined") return;
     let particles: p5.Vector[] = [];
     let sizes: number[] = [];
     let alphas: number[] = [];
@@ -47,7 +49,7 @@ const PixelBG = () => {
         p.fill(255, a)
         p.square(particle.x, particle.y, r)
         
-        particle.y -= 2
+        particle.y -= 1
 
         const ratio = 0.01
         const xOff = p.map(p.noise(particle.x*ratio, particle.y*ratio), 0, 1, -3, 3)
@@ -77,7 +79,7 @@ const PixelBG = () => {
   return (
     <div ref={containerRef} className="w-full h-screen fixed top-0 left-0 z-[-1] overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full">
-        {/* <P5Wrapper sketch={sketch} /> */}
+        <P5Wrapper sketch={sketch} />
       </div>
       <div className="flex justify-between items-end mx-auto max-w-screen-2xl w-full h-full md:px-12">
         <div className="flex flex-col items-center">

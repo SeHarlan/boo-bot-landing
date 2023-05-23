@@ -1,9 +1,12 @@
 import { Grid, LongCross } from "@/svg/pixelElements";
 import EntranceWrapper from "../EntranceWrapper";
+import { FC, ReactNode } from "react";
+import { Check, Close } from "@/svg/basic";
+import clsx from "clsx";
 
 const How = () => {
   return (
-    <div id="how" className="standardContainer mb-20">
+    <div id="about" className="standardContainer mb-20 [scroll-margin:100px]">
       <EntranceWrapper >
         <h2 className="text-4xl underline text-center mb-8">How Boo Bot Works</h2>
         <p className="text-lg text-center mb-20">Experience the next generation of web3 loyalty rewards - built on fairness and equality</p>
@@ -43,3 +46,4 @@ const How = () => {
 }
 
 export default How;
+

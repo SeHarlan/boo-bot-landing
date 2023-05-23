@@ -46,6 +46,8 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
       const halfHeight = viewportHeight / 2;
       const scrollingDown = prevY.current >= elementTop;
 
+      if(prevY.current === 0) setTransClass(enteredTransClass)
+
       if (scrollingDown) { 
         if (elementTop > halfHeight && elementTop < viewportHeight - threshold) {
           // Element is past the threshold bottom of the screen
@@ -67,6 +69,8 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
       prevY.current = elementTop;
     };
 
+    handleScroll()
+
     // Attach the scroll event listener
     window.addEventListener('scroll', handleScroll);
 
@@ -74,7 +78,7 @@ const EntranceWrapper: FC<EntranceWrapperProps> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [ref]);
 
 
   return (

@@ -25,12 +25,12 @@ const ThemedSwiper:FC<{slideContent: ReactNode[]}> = ({slideContent}) => {
     >
       {slideContent.map((content, i) => (
         <SwiperSlide key={i} className='p-8 h-[auto_!important]'>
-          <div className='h-full border-2 rounded-2xl bg-themeBlack/90 px-14 py-8'>
+          <div className='h-full border-2 rounded-2xl bg-themeBlack/90 px-4 md:px-14 py-8'>
             {content}
           </div>
         </SwiperSlide>
       ))}
-      <div className='flex justify-between w-full absolute bottom-16 left-0 px-[10%] md:px-[30%] lg:px-[32%]'>
+      <div className='flex justify-between w-full absolute bottom-16 left-0 px-[11%] md:px-[30%] lg:px-[32%]'>
         <SwiperButton type="prev" />
         <SwiperButton type="next" />
       </div>

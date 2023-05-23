@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   body {
     @apply bg-themeBlack text-themeWhite font-body;
     text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
@@ -37,10 +38,14 @@
     @apply text-themePink;
     @apply animate-glitchRight;
   }
-
-
 }
-
+html {
+  scroll-behavior: smooth !important;
+  --scroll-behavior: smooth !important;
+}
+.noShadow {
+  text-shadow: none;
+}
 /* fallback for the useVHOverride hook */
 /* :root {
   --vh: 1vh; 

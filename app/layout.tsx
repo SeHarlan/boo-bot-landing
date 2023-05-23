@@ -4,6 +4,7 @@ import './globals.css'
 import { Oswald } from 'next/font/google'
 import localFont from 'next/font/local'
 import PixelBG from '@/components/PixelBg';
+import Header from '@/components/Header';
 
 const oswald = Oswald({
   variable: "--oswald",
@@ -36,8 +37,8 @@ const avenir = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'BooBot Onboarding',
-  description: 'Get next gen web3 services in your Discord server',
+  title: 'Boo Bot',
+  description: 'Next Gen Web3 services for your Discord server',
 }
 
 export default function RootLayout({
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(avenir.variable, oswald.variable)}>
+        <Header />
         {children}
         <PixelBG />
       </body>
