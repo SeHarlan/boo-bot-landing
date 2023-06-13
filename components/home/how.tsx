@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 const How = () => {
   return (
-    <div id="about" className="standardContainer mb-20 [scroll-margin:100px]">
+    <div id="about" className="standardContainer mb-20 [scroll-margin:100px_!important]">
       <EntranceWrapper >
         <h2 className="text-4xl underline text-center mb-8">How Boo Bot Works</h2>
         <p className="text-lg text-center mb-20">Experience the next generation of web3 loyalty rewards - built on fairness and equality</p>

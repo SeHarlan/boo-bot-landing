@@ -1,23 +1,27 @@
 "use client"
 
 import Image from "next/image";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import logo from "../public/boo icon.png";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import CTAButton from "./CTAButton";
 
 const Header: FC = () => {
   const router = useRouter()
+  const pathname = usePathname()
 
-  
   const handleScroll = (id: string) => {
-    // router.replace(`/#${id}`)
-    const el = document.getElementById(id)
-    if (el) { 
-      el.scrollIntoView({
-        block: 'start',
-        behavior: 'smooth',
-      })
-      if(location) location.hash = id
+
+    if (pathname !== "/") router.push(`/#${id}`)
+    else {
+      const el = document.getElementById(id)
+      if (el) { 
+        el.scrollIntoView({
+            block: 'start',
+            behavior: 'smooth',
+          })
+        if(location) location.hash = id
+      }
     }
   }
 
@@ -36,6 +40,9 @@ const Header: FC = () => {
           <button onClick={() => handleScroll("faq")} className="hover:text-themeSkyBlue">
             <h3 className="text-xl underline">FAQs</h3>
           </button>
+
+          {pathname === "/" ? <CTAButton small className="hidden md:block" /> : null}
+          
         </div>
       </div>
     </div>

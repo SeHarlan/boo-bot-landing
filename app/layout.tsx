@@ -5,6 +5,7 @@ import { Oswald } from 'next/font/google'
 import localFont from 'next/font/local'
 import PixelBG from '@/components/PixelBg';
 import Header from '@/components/Header';
+import SignedInProvider from '@/context/SignedInProvider';
 
 const oswald = Oswald({
   variable: "--oswald",
@@ -52,9 +53,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(avenir.variable, oswald.variable)}>
-        <Header />
-        {children}
-        <PixelBG />
+        <SignedInProvider>
+          <Header />
+          {children}
+          <PixelBG />
+        </SignedInProvider>
       </body>
     </html>
   )

@@ -35,6 +35,9 @@ module.exports = {
         title: ['var(--oswald)'],
         body: ["var(--avenir)"]
       },
+      scale: {
+        '-1': '-1'
+      },
       keyframes: {
         borderRotate: borderRotateKeyframes(),
         float: {

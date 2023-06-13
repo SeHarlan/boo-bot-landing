@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
 const FAQ = () => {
   return (
     <div id="faq" className="standardContainer [scroll-margin:100px]">
-      <div className="bg-themeWhite/10 rounded-2xl px-6 py-8">
+      <div className="bg-themeWhite/10 rounded-2xl p-4 md:p-6 ">
         <h3 className="text-4xl underline text-center mb-8">Have Any Questions?</h3>
         <div className=''>
           <FAQItem
