@@ -3,14 +3,18 @@ import clsx from "clsx"
 import { FC, ReactNode } from "react"
 
 
-const TierTable = () => {
+const TierTable = ({
+  gridClassName = "max-w-screen-lg my-20 mx-auto rounded-md bg-themeBlack/90",
+  wrapperClassName = "standardContainer overflow-auto"
+}) => {
   return (
-    <div id="tierTable" className="standardContainer overflow-auto">
+    <div id="tierTable" className={wrapperClassName}>
 
-      <div className="
-        grid grid-cols-[10rem_1fr_1fr_1fr] gap-y-3 
-        max-w-screen-lg my-20 mx-auto rounded-md bg-themeBlack/90
-      ">
+      <div className={clsx(
+          "grid grid-cols-[10rem_1fr_1fr_1fr] gap-y-3",
+          gridClassName
+        )}  
+      >
         <div />
         <TableHeader pos="left">
           <h4 className="font-bold">Baby Boo Bot</h4>

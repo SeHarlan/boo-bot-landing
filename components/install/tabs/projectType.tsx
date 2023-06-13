@@ -1,12 +1,14 @@
-import Radio, { makeOptions } from "@/components/Radio"
+import { makeOptions } from "@/components/Radio"
 import { FC } from "react";
-import { Information, InformationTabProps } from "./tabs";
+import { InformationTabProps } from "./tabs";
+import Checkbox from "@/components/Checkbox";
 
 const ProjectTypeTab: FC<InformationTabProps> = ({information, setInformation}) => {
   return (
     <div className="">
-      <p className="text-lg mb-2">What type of web3 project do you have?</p>
-      <Radio
+      <p className="text-lg">What type of web3 project do you have?</p>
+      <p className="text-sm mb-2 text-neutral-400">You can choose multiple</p>
+      <Checkbox
         name="type"
         selected={information.type}
         setSelected={(type) => setInformation({ ...information, type })}

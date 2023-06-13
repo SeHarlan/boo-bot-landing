@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation"
 
 
 export interface Information { 
-  type: string | null;
+  type: string[];
   userCount: string | null;
   purpose: string | null;
   purposeOther: string | null;
@@ -42,14 +42,9 @@ const Tabs = () => {
   const { signedIn, handleSignOut } = useSignedIn()
 
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  // const tabsRef = useRef<HTMLHeadingElement[]>([]);
-  // const currentTab = tabsRef.current[activeTabIndex];
-
-  // const [tabUnderlineWidth, setTabUnderlineWidth] = useState(177);
-  // const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
 
   const [information, setInformation] = useState<Information>({
-    type: null,
+    type: [],
     userCount: null,
     purpose: null,
     purposeOther: null,
@@ -69,27 +64,19 @@ const Tabs = () => {
     setActiveTabIndex(activeTabIndex + 1)
   }
 
+  const formResults = {
+    information,
+    version,
+    paymentComplete,
+    referrals,
+    blockchain
+  }
 
   const handleInstall = () => {
-    alert(`You have installed boo bot on ${blockchain}!`)
+    alert(`You have installed boo bot! this is all the info: ${JSON.stringify(formResults)}`)
     router.push("/")
     handleSignOut()
   }
-
-
-
-  // useEffect(() => {
-  //   if(!currentTab) return
-  //   function setTabPosition() {
-  //     setTabUnderlineLeft(currentTab?.offsetLeft ?? 50);
-  //     setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
-  //   }
-
-  //   setTabPosition();
-  //   window.addEventListener("resize", setTabPosition);
-
-  //   return () => window.removeEventListener("resize", setTabPosition);
-  // }, [currentTab]);
 
   const infoLabels = {
     heading: "Finding the right version for you",
@@ -126,7 +113,7 @@ const Tabs = () => {
 
   const checkFinished = () => {
     switch (activeTabIndex) {
-      case 0: return Boolean(information.type);
+      case 0: return Boolean(information.type.length);
       case 1: return Boolean(information.userCount);
       case 2: return Boolean(information.purpose);
       case 3: return Boolean(version);
