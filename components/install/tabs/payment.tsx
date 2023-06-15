@@ -1,4 +1,4 @@
-import Button from "@/components/Button"
+
 import { FC } from "react"
 import { Version, Information } from "./tabs";
 

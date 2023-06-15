@@ -1,14 +1,9 @@
 "use client"
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
-interface HandleSignInArgs {
-  useTwitter: boolean;
-  email?: string;
-}
-
 const SignedInContext = createContext({
   signedIn: false,
-  handleSignIn: ({ useTwitter, email }: HandleSignInArgs) => { },
+  handleSignIn: () => { },
   handleSignOut: () => { },
 });
 
@@ -16,13 +11,8 @@ export const useSignedIn = () => useContext(SignedInContext);
 
 export default function SignedInProvider({ children }: { children: ReactNode }) {
   const [signedIn, setSignedIn] = useState(false)
-  const handleSignIn = ({ useTwitter, email }: HandleSignInArgs) => {
-    if (useTwitter) {
-      // handle Twitter connect
-    } else {
-      if (!email) throw new Error("Email is required")
-      // handle email connect
-    }
+
+  const handleSignIn = () => {
     setSignedIn(true)
   }
   const handleSignOut = () => { 

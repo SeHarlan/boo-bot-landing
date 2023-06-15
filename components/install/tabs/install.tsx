@@ -1,4 +1,3 @@
-import Button from "@/components/Button"
 import Radio, { makeOptions } from "@/components/Radio"
 import { FC, useState } from "react"
 import { ChainOptions } from "./tabs";

@@ -1,4 +1,3 @@
-
 import Radio, { makeOptions } from "@/components/Radio"
 import { FC } from "react";
 import { InformationTabProps } from "./tabs";

@@ -14,9 +14,12 @@ import InstallTab from "./install"
 import { Cross, Grid } from "@/svg/pixelElements"
 import { useSignedIn } from "@/context/SignedInProvider"
 import { useRouter } from "next/navigation"
+import ProjectIdTab from "./projectId"
+import SetupTab from "./setup"
 
 
 export interface Information { 
+  serverID: string | null
   type: string[];
   userCount: string | null;
   purpose: string | null;
@@ -48,11 +51,13 @@ const Tabs = () => {
     userCount: null,
     purpose: null,
     purposeOther: null,
+    serverID: null
   })
   const [version, setVersion] = useState<Version>(null)
   const [paymentComplete, setPaymentComplete] = useState(false)
   const [referrals, setReferrals] = useState<string[]>([])
   const [blockchain, setBlockchain] = useState<ChainOptions>(null)
+  const [inviteLink, setInviteLink] = useState<string | null>(null)
 
   const handlePurchase = () => {
     setPaymentComplete(true)
@@ -60,7 +65,6 @@ const Tabs = () => {
   }
 
   const handleInvite = () => {
-    alert(`You've invited ${referrals.join(", ")}!`)
     setActiveTabIndex(activeTabIndex + 1)
   }
 
@@ -74,8 +78,15 @@ const Tabs = () => {
 
   const handleInstall = () => {
     alert(`You have installed boo bot! this is all the info: ${JSON.stringify(formResults)}`)
-    router.push("/")
-    handleSignOut()
+
+    // send form results to BE, recieve an invite Link
+    const inviteLink = "https://www.google.com"
+    if (inviteLink) {
+      setInviteLink(inviteLink)
+      setActiveTabIndex(activeTabIndex + 1)
+    } else {
+      // handle error
+    }
   }
 
   const infoLabels = {
@@ -83,10 +94,12 @@ const Tabs = () => {
     description: "Tell us about your project",
   }
 
+  //if changing order of tabs, make sure to adjust the index of checkFinished and continueButton accordingly
   const tabs = [
     { ...infoLabels, content: <ProjectTypeTab information={information} setInformation={setInformation} /> },
     { ...infoLabels, content: <ProjectUsersTab information={information} setInformation={setInformation} /> },
     { ...infoLabels, content: <ProjectPurposeTab information={information} setInformation={setInformation} /> },
+    { ...infoLabels, content: <ProjectIdTab information={information} setInformation={setInformation} /> },
     {
       heading:
         "Select Your Boo Bot",
@@ -107,6 +120,11 @@ const Tabs = () => {
       heading: "Choose Your Chain and Install",
       description: "Select the desired blockchain (Solana, Near, Sui, or None) and install the Boo Bot on Discord.",
       content: <InstallTab blockchain={blockchain} setBlockchain={setBlockchain}/>
+    },
+    {
+      heading: "Installation Complete!",
+      description: "Now we just need to use this link to invite your new Boo Bot to your server and follow a few simple steps",
+      content: <SetupTab inviteLink={inviteLink} />
     }
   ]
 
@@ -116,16 +134,17 @@ const Tabs = () => {
       case 0: return Boolean(information.type.length);
       case 1: return Boolean(information.userCount);
       case 2: return Boolean(information.purpose);
-      case 3: return Boolean(version);
-      case 4: return paymentComplete;
-      case 5: true //Referrals Tab optional
+      case 3: return Boolean(information.serverID);
+      case 4: return Boolean(version);
+      case 5: return paymentComplete;
+      case 6: true //Referrals Tab optional
       default: return true;
     }
   }
 
   const continueButton = () => {
     switch (activeTabIndex) {
-      case 4: return (
+      case 5: return (
         <Button
           small
           sizeClass="text-lg py-0 px-4"
@@ -134,7 +153,7 @@ const Tabs = () => {
           rightIcon={<RightArrow sizeClass="w-5 h-5" />}
         />
       )
-      case 5: return (
+      case 6: return (
         <>
           <Button
             disabled={referrals.length === 0}
@@ -152,8 +171,10 @@ const Tabs = () => {
           </button>
         </>
       )
-      case 6: return (
+      case 7: return (
         <Button
+          small
+          sizeClass="text-lg py-0 px-4"
           disabled={!blockchain}
           text="Install!"
           onClick={handleInstall}
@@ -161,6 +182,7 @@ const Tabs = () => {
           rightIcon={<Grid className="-scale-x-1"/>}
         />
       )
+      case 8: return null;
       default: return (
         <Button
           small
@@ -199,12 +221,6 @@ const Tabs = () => {
           {tabs[activeTabIndex].content}
         </div>
         <div className="flex justify-center gap-3">
-          {/* <Button
-            small
-            text="&lt; Back"
-            disabled={activeTabIndex === 0}
-            onClick={() => setActiveTabIndex(activeTabIndex - 1)}
-          /> */}
           {continueButton()}
         </div>
       </div>

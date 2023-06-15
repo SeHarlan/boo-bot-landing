@@ -8,29 +8,29 @@ import { useSignedIn } from "@/context/SignedInProvider"
 
 const SignIn = () => { 
   const { signedIn, handleSignIn } = useSignedIn()
-  const [useTwitter, setUseTwitter] = useState(true)
-  const [email, setEmail] = useState("")
+  // const [useTwitter, setUseTwitter] = useState(true)
+  // const [email, setEmail] = useState("")
 
   const handleSignInClick = () => { 
-    handleSignIn({ useTwitter, email })
+    handleSignIn()
   }
 
-  const emailInput = (
-    <Transition
-      appear={true}
-      show={!useTwitter}
-    >
-      <input
-        type="email"
-        className="block mx-auto rounded bg-neutral-700 py-2 px-4 mt-4"
-        placeholder="Enter Work Email"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value)
-        }}
-      />
-    </Transition>
-  )
+  // const emailInput = (
+  //   <Transition
+  //     appear={true}
+  //     show={!useTwitter}
+  //   >
+  //     <input
+  //       type="email"
+  //       className="block mx-auto rounded bg-neutral-700 py-2 px-4 mt-4"
+  //       placeholder="Enter Work Email"
+  //       value={email}
+  //       onChange={(e) => {
+  //         setEmail(e.target.value)
+  //       }}
+  //     />
+  //   </Transition>
+  // )
 
   if(signedIn) return null
 
@@ -38,7 +38,8 @@ const SignIn = () => {
     <div className="flex justify-center items-center h-full">
       <div className="rounded-xl bg-neutral-800 p-4 md:px-12 md:py-8 w-full max-w-lg">
         <h1 className="text-4xl text-center mb-6">Let's Get Started</h1>
-        <p className="text-lg text-center mb-8">Log in with your Twitter or Email</p>
+
+        {/* <p className="text-lg text-center mb-8">Log in with your Twitter or Email</p>
         <Switch
           checked={useTwitter}
           onChange={() => setUseTwitter(!useTwitter)}
@@ -57,14 +58,15 @@ const SignIn = () => {
           >
             {!useTwitter ? <Twitter className="fill-neutral-800"/> : <Email className="stroke-1 stroke-neutral-800" />}
           </span>
-        </Switch>
+        </Switch> */}
         
-        {!useTwitter ? emailInput : null}
+        {/* {!useTwitter ? emailInput : null} */}
         
         <Button
           className="block mx-auto mt-8"
-          text={`Log In With ${useTwitter ? "Twitter" : "Email"}`}
-          disabled={!useTwitter && !email}
+          // text={`Log In With ${useTwitter ? "Twitter" : "Email"}`}
+          // disabled={!useTwitter && !email}
+          text="Log In With Discord"
           onClick={handleSignInClick}
         />
       </div>

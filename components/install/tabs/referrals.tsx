@@ -1,4 +1,5 @@
-import Button from "@/components/Button";
+"use client"
+
 import { Close } from "@/svg/basic";
 import { FC, useRef, useState } from "react";
 
