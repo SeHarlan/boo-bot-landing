@@ -5,14 +5,19 @@ import { FC } from "react";
 import logo from "../public/boo icon.png";
 import { usePathname, useRouter } from "next/navigation";
 import CTAButton from "./CTAButton";
+import { signOut, useSession } from "next-auth/react";
+import Button from "./Button";
 
 const Header: FC = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const { data: session } = useSession()
+  
+  const isHome = pathname === "/"
 
   const handleScroll = (id: string) => {
 
-    if (pathname !== "/") router.push(`/#${id}`)
+    if (!isHome) router.push(`/#${id}`)
     else {
       const el = document.getElementById(id)
       if (el) { 
@@ -24,6 +29,8 @@ const Header: FC = () => {
       }
     }
   }
+
+  const showSignOut = !isHome && Boolean(session)
 
   return (
     <div className="fixed top-0 left-0 w-full bg-themeBlack/70 shadow-lg z-30">
@@ -41,8 +48,15 @@ const Header: FC = () => {
             <h3 className="text-xl underline">FAQs</h3>
           </button>
 
-          {pathname === "/" ? <CTAButton small className="hidden md:block" /> : null}
-          
+          {isHome ? <CTAButton small className="hidden md:block" /> : null}
+          {showSignOut
+            ? (
+              <Button small
+                onClick={() => signOut()}
+                text="Sign Out"
+              />
+            )
+            : null}
         </div>
       </div>
     </div>

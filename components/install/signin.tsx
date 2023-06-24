@@ -1,18 +1,16 @@
 "use client"
 
-import { Email, Twitter } from "@/svg/basic"
-import { Switch, Transition } from "@headlessui/react"
-import { useState } from "react"
 import Button from "../Button"
-import { useSignedIn } from "@/context/SignedInProvider"
+import { useSession, signIn } from "next-auth/react"
 
 const SignIn = () => { 
-  const { signedIn, handleSignIn } = useSignedIn()
+
+  const { data: session, status } = useSession()
   // const [useTwitter, setUseTwitter] = useState(true)
   // const [email, setEmail] = useState("")
 
   const handleSignInClick = () => { 
-    handleSignIn()
+    signIn("discord")
   }
 
   // const emailInput = (
@@ -32,7 +30,7 @@ const SignIn = () => {
   //   </Transition>
   // )
 
-  if(signedIn) return null
+  if(session) return null
 
   return (
     <div className="flex justify-center items-center h-full">

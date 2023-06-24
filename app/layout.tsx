@@ -1,11 +1,26 @@
-import type { Metadata } from 'next';
+import type { GetServerSideProps, Metadata } from 'next';
 import clsx from 'clsx';
 import './globals.css'
 import { Oswald } from 'next/font/google'
 import localFont from 'next/font/local'
 import PixelBG from '@/components/PixelBg';
 import Header from '@/components/Header';
-import SignedInProvider from '@/context/SignedInProvider';
+import AuthProvider from '@/context/AuthProvider';
+import { Session, getServerSession } from 'next-auth';
+import { ReactNode } from 'react';
+import { authOptions } from './api/auth/[...nextauth]/route';
+import HelioProvider from '@/context/HelioProvider';
+// import SolanaProvider from '@/context/SolanaProvider';
+
+
+interface LayoutProps {
+  children: ReactNode;
+  pageProps: {
+    session: Session;
+    [key: string]: any;
+  };
+}
+
 
 const oswald = Oswald({
   variable: "--oswald",
@@ -45,19 +60,20 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function RootLayout({
+  children, 
+}: LayoutProps) {
+  const session = await getServerSession(authOptions)
   return (
     <html lang="en">
       <body className={clsx(avenir.variable, oswald.variable)}>
-        <SignedInProvider>
-          <Header />
-          {children}
-          <PixelBG />
-        </SignedInProvider>
+        {/* <SolanaProvider> */}
+          <AuthProvider session={session}>
+            <Header />
+            {children}
+            <PixelBG />
+          </AuthProvider>
+        {/* </SolanaProvider> */}
       </body>
     </html>
   )

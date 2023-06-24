@@ -10,7 +10,7 @@ interface CTAButtonProps {
 }
 
 const CTAButton: React.FC<CTAButtonProps> = ({ text = "Install the Bot in Seconds", className, small }) => { 
-const router = useRouter()
+  const router = useRouter()
   const handleClick = () => { 
     router.push("/install")
   }

@@ -5,6 +5,9 @@ import Hero from '@/components/home/hero'
 import How from '@/components/home/how'
 import Testimonials from '@/components/home/testimonials'
 import TierTable from '@/components/home/tierTable'
+import PaymentTab from '@/components/install/tabs/payment'
+
+
 
 export default function Home() {
   return (
@@ -20,7 +23,7 @@ export default function Home() {
         </div>
       </EntranceWrapper>
       <FAQ />
-      {/* <div className='h-screen' /> */}
     </main>
   )
 }
+

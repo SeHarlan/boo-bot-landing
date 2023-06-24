@@ -1,7 +1,7 @@
 "use client"
 
 import clsx from "clsx"
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import Button from "@/components/Button"
 import { RightArrow } from "@/svg/basic"
 import ProjectTypeTab from "./projectType"
@@ -11,11 +11,10 @@ import VersionTab from "./version"
 import PaymentTab from "./payment"
 import ReferralsTab from "./referrals"
 import InstallTab from "./install"
-import { Cross, Grid } from "@/svg/pixelElements"
-import { useSignedIn } from "@/context/SignedInProvider"
-import { useRouter } from "next/navigation"
+import { Grid } from "@/svg/pixelElements"
 import ProjectIdTab from "./projectId"
 import SetupTab from "./setup"
+import { useSession } from "next-auth/react"
 
 
 export interface Information { 
@@ -41,8 +40,7 @@ export interface VersionTabProps {
 }
 
 const Tabs = () => {
-  const router = useRouter()
-  const { signedIn, handleSignOut } = useSignedIn()
+  const { data: session } = useSession()
 
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
@@ -59,16 +57,12 @@ const Tabs = () => {
   const [blockchain, setBlockchain] = useState<ChainOptions>(null)
   const [inviteLink, setInviteLink] = useState<string | null>(null)
 
-  const handlePurchase = () => {
-    setPaymentComplete(true)
-    setActiveTabIndex(activeTabIndex + 1)
-  }
-
   const handleInvite = () => {
     setActiveTabIndex(activeTabIndex + 1)
   }
 
   const formResults = {
+    session,
     information,
     version,
     paymentComplete,
@@ -96,64 +90,83 @@ const Tabs = () => {
 
   //if changing order of tabs, make sure to adjust the index of checkFinished and continueButton accordingly
   const tabs = [
-    { ...infoLabels, content: <ProjectTypeTab information={information} setInformation={setInformation} /> },
-    { ...infoLabels, content: <ProjectUsersTab information={information} setInformation={setInformation} /> },
-    { ...infoLabels, content: <ProjectPurposeTab information={information} setInformation={setInformation} /> },
-    { ...infoLabels, content: <ProjectIdTab information={information} setInformation={setInformation} /> },
     {
-      heading:
-        "Select Your Boo Bot",
+      ...infoLabels,
+      content: <ProjectTypeTab information={information} setInformation={setInformation} />,
+      check: () => Boolean(information.type.length),
+      button: "default",
+    },
+    {
+      ...infoLabels,
+      content: <ProjectUsersTab information={information} setInformation={setInformation} />,
+      check: () => Boolean(information.userCount),
+      button: "default",
+    },
+    {
+      ...infoLabels,
+      content: <ProjectPurposeTab information={information} setInformation={setInformation} />,
+      check: () => Boolean(information.purpose),
+      button: "default",
+    },
+    {
+      heading: "Select Your Boo Bot",
       description: "Pick the Boo Bot version that best suits your project's needs: Basic, Premium, or Complete.",
       content: <VersionTab version={version} setVersion={setVersion} />,
+      check: () => Boolean(version),
+      button: "default",
     },
     {
       heading: "Connect and Choose",
       description: "Connect your Solana Phantom/Backpack wallet and select your preferred payment plan.",
-      content: <PaymentTab information={information} version={version} setPaymentComplete={setPaymentComplete} />
+      content: <PaymentTab information={information} version={version} setPaymentComplete={setPaymentComplete} />,
+      check: () => true,//paymentComplete,
+      button: "default",
     },
     {
       heading: "Spread the Word and Earn Rewards",
       description: "Invite friends to Boo Bot and earn 30% of their subscription or prepayment. Start now or later from your account.",
-      content: <ReferralsTab referrals={referrals} setReferrals={setReferrals} />
+      content: <ReferralsTab referrals={referrals} setReferrals={setReferrals} />,
+      check: () => true, //referals are optional
+      button: "invite",
+    },
+    {
+      heading: "What is your Discord Server ID?",
+      description: "Turn on Developer Mode in Discord and right click on your server to copy the ID.",
+      content: <ProjectIdTab information={information} setInformation={setInformation} />,
+      check: () => Boolean(information.serverID),
+      button: "default",
     },
     {
       heading: "Choose Your Chain and Install",
       description: "Select the desired blockchain (Solana, Near, Sui, or None) and install the Boo Bot on Discord.",
-      content: <InstallTab blockchain={blockchain} setBlockchain={setBlockchain}/>
+      content: <InstallTab blockchain={blockchain} setBlockchain={setBlockchain} />,
+      check: () => Boolean(blockchain),
+      button: "install",
     },
     {
       heading: "Installation Complete!",
       description: "Now we just need to use this link to invite your new Boo Bot to your server and follow a few simple steps",
-      content: <SetupTab inviteLink={inviteLink} />
+      content: <SetupTab inviteLink={inviteLink} />,
+      check: () => Boolean(inviteLink),
+      button: "none",
     }
   ]
 
 
-  const checkFinished = () => {
-    switch (activeTabIndex) {
-      case 0: return Boolean(information.type.length);
-      case 1: return Boolean(information.userCount);
-      case 2: return Boolean(information.purpose);
-      case 3: return Boolean(information.serverID);
-      case 4: return Boolean(version);
-      case 5: return paymentComplete;
-      case 6: true //Referrals Tab optional
-      default: return true;
-    }
-  }
+  const checkFinished = () => tabs[activeTabIndex].check();
 
   const continueButton = () => {
-    switch (activeTabIndex) {
-      case 5: return (
-        <Button
-          small
-          sizeClass="text-lg py-0 px-4"
-          text="Purchase and Continue"
-          onClick={handlePurchase}
-          rightIcon={<RightArrow sizeClass="w-5 h-5" />}
-        />
-      )
-      case 6: return (
+    switch (tabs[activeTabIndex].button) {
+      // case "purchase": return (
+      //   <Button
+      //     small
+      //     sizeClass="text-lg py-0 px-4"
+      //     text="Purchase and Continue"
+      //     onClick={handlePurchase}
+      //     rightIcon={<RightArrow sizeClass="w-5 h-5" />}
+      //   />
+      // )
+      case "invite": return (
         <>
           <Button
             disabled={referrals.length === 0}
@@ -171,7 +184,7 @@ const Tabs = () => {
           </button>
         </>
       )
-      case 7: return (
+      case "install": return (
         <Button
           small
           sizeClass="text-lg py-0 px-4"
@@ -182,7 +195,7 @@ const Tabs = () => {
           rightIcon={<Grid className="-scale-x-1"/>}
         />
       )
-      case 8: return null;
+      case "none": return null;
       default: return (
         <Button
           small
@@ -196,7 +209,7 @@ const Tabs = () => {
     }
   }
 
-  if (!signedIn) return null
+  if (!session) return null
 
   return (
     <div className="flex justify-center items-center h-full relative">
