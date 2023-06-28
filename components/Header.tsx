@@ -7,11 +7,15 @@ import { usePathname, useRouter } from "next/navigation";
 import CTAButton from "./CTAButton";
 import { signOut, useSession } from "next-auth/react";
 import Button from "./Button";
+import { User } from "@/app/api/auth/[...nextauth]/route";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const Header: FC = () => {
   const router = useRouter()
   const pathname = usePathname()
   const { data: session } = useSession()
+
+  const { clearForm } = useLocalStorage()
   
   const isHome = pathname === "/"
 
@@ -28,6 +32,11 @@ const Header: FC = () => {
         if(location) location.hash = id
       }
     }
+  }
+
+  const handleSignOut = () => { 
+    clearForm()
+    signOut()
   }
 
   const showSignOut = !isHome && Boolean(session)
@@ -52,7 +61,7 @@ const Header: FC = () => {
           {showSignOut
             ? (
               <Button small
-                onClick={() => signOut()}
+                onClick={handleSignOut}
                 text="Sign Out"
               />
             )

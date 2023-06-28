@@ -1,7 +1,7 @@
 "use client"
 
 import clsx from "clsx"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "@/components/Button"
 import { RightArrow } from "@/svg/basic"
 import ProjectTypeTab from "./projectType"
@@ -15,6 +15,8 @@ import { Grid } from "@/svg/pixelElements"
 import ProjectIdTab from "./projectId"
 import SetupTab from "./setup"
 import { useSession } from "next-auth/react"
+import useLocalStorage from "@/hooks/useLocalStorage"
+import { User } from "@/app/api/auth/[...nextauth]/route"
 
 
 export interface Information { 
@@ -39,45 +41,79 @@ export interface VersionTabProps {
   setVersion: (information: Version) => void;
 }
 
+export interface Form {
+  activeTabIndex: number;
+  information: Information;
+  version: Version;
+  paymentComplete: boolean;
+  referrals: string[];
+  blockchain: ChainOptions;
+}
+
 const Tabs = () => {
   const { data: session } = useSession()
 
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const { getForm, setForm } = useLocalStorage()
 
-  const [information, setInformation] = useState<Information>({
+  const existingForm = getForm()
+
+  const [activeTabIndex, setActiveTabIndex] = useState(existingForm?.activeTabIndex || 0);
+
+  const [information, setInformation] = useState<Information>(existingForm?.information || {
     type: [],
     userCount: null,
     purpose: null,
     purposeOther: null,
     serverID: null
   })
-  const [version, setVersion] = useState<Version>(null)
-  const [paymentComplete, setPaymentComplete] = useState(false)
-  const [referrals, setReferrals] = useState<string[]>([])
-  const [blockchain, setBlockchain] = useState<ChainOptions>(null)
-  const [inviteLink, setInviteLink] = useState<string | null>(null)
+  const [version, setVersion] = useState<Version>(existingForm.version || null)
+  const [paymentComplete, setPaymentComplete] = useState(existingForm.paymentComplete || false)
+  const [referrals, setReferrals] = useState<string[]>(existingForm.referrals || [])
+  const [blockchain, setBlockchain] = useState<ChainOptions>(existingForm.blockchain || null)
+  const [inviteLink, setInviteLink] = useState<string | null>(existingForm.inviteLink || null)
 
-  const handleInvite = () => {
-    setActiveTabIndex(activeTabIndex + 1)
+  const handleSetActiveTabIndex = (activeTabIndex: number) => {
+    setActiveTabIndex(activeTabIndex)
+    setForm("activeTabIndex", activeTabIndex)
   }
 
-  const formResults = {
-    session,
-    information,
-    version,
-    paymentComplete,
-    referrals,
-    blockchain
+  const handleSetInformation = (information: Information) => { 
+    setInformation(information)
+    setForm("information", information)
+  }
+  const handleSetVersion = (version: Version) => { 
+    setVersion(version)
+    setForm("version", version)
+  }
+  const handleSetPaymentComplete = (paymentComplete: boolean) => { 
+    setPaymentComplete(paymentComplete)
+    setForm("paymentComplete", paymentComplete)
+  }
+  const handleSetReferrals = (referrals: string[]) => { 
+    setReferrals(referrals)
+    setForm("referrals", referrals)
+  }
+  const handleSetBlockchain = (blockchain: ChainOptions) => { 
+    setBlockchain(blockchain)
+    setForm("blockchain", blockchain)
+  }
+  const handleSetInviteLink = (inviteLink: string | null) => { 
+    setInviteLink(inviteLink)
+    setForm("inviteLink", inviteLink)
+  }
+
+  const handleInvite = () => {
+    handleSetActiveTabIndex(activeTabIndex + 1)
   }
 
   const handleInstall = () => {
-    alert(`You have installed boo bot! this is all the info: ${JSON.stringify(formResults)}`)
-
+    alert(`You have installed boo bot! this is all the info: ${JSON.stringify(getForm())}`)
+    console.log(getForm())
     // send form results to BE, recieve an invite Link
     const inviteLink = "https://www.google.com"
     if (inviteLink) {
       setInviteLink(inviteLink)
-      setActiveTabIndex(activeTabIndex + 1)
+      handleSetActiveTabIndex(activeTabIndex + 1)
     } else {
       // handle error
     }
@@ -92,54 +128,54 @@ const Tabs = () => {
   const tabs = [
     {
       ...infoLabels,
-      content: <ProjectTypeTab information={information} setInformation={setInformation} />,
+      content: <ProjectTypeTab information={information} setInformation={handleSetInformation} />,
       check: () => Boolean(information.type.length),
       button: "default",
     },
     {
       ...infoLabels,
-      content: <ProjectUsersTab information={information} setInformation={setInformation} />,
+      content: <ProjectUsersTab information={information} setInformation={handleSetInformation} />,
       check: () => Boolean(information.userCount),
       button: "default",
     },
     {
       ...infoLabels,
-      content: <ProjectPurposeTab information={information} setInformation={setInformation} />,
+      content: <ProjectPurposeTab information={information} setInformation={handleSetInformation} />,
       check: () => Boolean(information.purpose),
       button: "default",
     },
     {
       heading: "Select Your Boo Bot",
       description: "Pick the Boo Bot version that best suits your project's needs: Basic, Premium, or Complete.",
-      content: <VersionTab version={version} setVersion={setVersion} />,
+      content: <VersionTab version={version} setVersion={handleSetVersion} />,
       check: () => Boolean(version),
       button: "default",
     },
     {
       heading: "Connect and Choose",
       description: "Connect your Solana Phantom/Backpack wallet and select your preferred payment plan.",
-      content: <PaymentTab information={information} version={version} setPaymentComplete={setPaymentComplete} />,
-      check: () => true,//paymentComplete,
+      content: <PaymentTab information={information} version={version} setPaymentComplete={handleSetPaymentComplete} />,
+      check: () => true,//paymentComplete, TODO uncomment for production
       button: "default",
     },
     {
       heading: "Spread the Word and Earn Rewards",
       description: "Invite friends to Boo Bot and earn 30% of their subscription or prepayment. Start now or later from your account.",
-      content: <ReferralsTab referrals={referrals} setReferrals={setReferrals} />,
+      content: <ReferralsTab referrals={referrals} setReferrals={handleSetReferrals} />,
       check: () => true, //referals are optional
       button: "invite",
     },
     {
       heading: "What is your Discord Server ID?",
       description: "Turn on Developer Mode in Discord and right click on your server to copy the ID.",
-      content: <ProjectIdTab information={information} setInformation={setInformation} />,
+      content: <ProjectIdTab information={information} setInformation={handleSetInformation} />,
       check: () => Boolean(information.serverID),
       button: "default",
     },
     {
       heading: "Choose Your Chain and Install",
       description: "Select the desired blockchain (Solana, Near, Sui, or None) and install the Boo Bot on Discord.",
-      content: <InstallTab blockchain={blockchain} setBlockchain={setBlockchain} />,
+      content: <InstallTab blockchain={blockchain} setBlockchain={handleSetBlockchain} />,
       check: () => Boolean(blockchain),
       button: "install",
     },
@@ -157,15 +193,6 @@ const Tabs = () => {
 
   const continueButton = () => {
     switch (tabs[activeTabIndex].button) {
-      // case "purchase": return (
-      //   <Button
-      //     small
-      //     sizeClass="text-lg py-0 px-4"
-      //     text="Purchase and Continue"
-      //     onClick={handlePurchase}
-      //     rightIcon={<RightArrow sizeClass="w-5 h-5" />}
-      //   />
-      // )
       case "invite": return (
         <>
           <Button
@@ -178,7 +205,7 @@ const Tabs = () => {
           />
           <button
             className="text-neutral-300 text-sm font-medium hover:text-white duration-200 ml-4"
-            onClick={() => setActiveTabIndex(activeTabIndex + 1)}
+            onClick={() => handleSetActiveTabIndex(activeTabIndex + 1)}
           >
             Skip for now 
           </button>
@@ -202,7 +229,7 @@ const Tabs = () => {
           sizeClass="text-lg py-0 px-4"
           text="Continue"
           disabled={(activeTabIndex === tabs.length - 1) || checkFinished() === false}
-          onClick={() => setActiveTabIndex(activeTabIndex + 1)}
+          onClick={() => handleSetActiveTabIndex(activeTabIndex + 1)}
           rightIcon={<RightArrow sizeClass="w-5 h-5" />}
         />
       )
@@ -233,7 +260,15 @@ const Tabs = () => {
           <p className="text-neutral-400 mb-4">{tabs[activeTabIndex].description}</p>
           {tabs[activeTabIndex].content}
         </div>
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center gap-3 relative">
+          {(activeTabIndex > 0 && activeTabIndex >= tabs.length) ? (
+            <button
+              className="text-neutral-300/50 text-sm font-medium hover:text-white duration-200 mr-4"
+              onClick={() => handleSetActiveTabIndex(activeTabIndex > 0 ? activeTabIndex - 1 : 0)}
+            >
+              back
+            </button>
+          ) : null}
           {continueButton()}
         </div>
       </div>

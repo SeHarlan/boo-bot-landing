@@ -3,7 +3,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import { JWT } from 'next-auth/jwt'
 import { Session as NextAuthSession, User as NextAuthUser } from 'next-auth'
 
-interface User extends NextAuthUser {
+export interface User extends NextAuthUser {
   id: string
 }
 

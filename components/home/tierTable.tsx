@@ -34,22 +34,24 @@ const TierTable = ({
         </FeatureCell>
         <TableCell hasFeature="yes" pos="left"/>
         <TableCell hasFeature="yes" pos="center"/>
-        <TableCell hasFeature="yes" pos="right"/>
-
+        <TableCell hasFeature="yes" pos="right" />
+        
         <FeatureCell>
-          Twitter Raids
+          Boonties
         </FeatureCell>
         <TableCell hasFeature="yes" pos="left" />
         <TableCell hasFeature="yes" pos="center" />
         <TableCell hasFeature="yes" pos="right" />
 
+
         <FeatureCell>
-          Boonties
+          Twitter Raids
         </FeatureCell>
         <TableCell hasFeature="no" pos="left" />
         <TableCell hasFeature="yes" pos="center" />
         <TableCell hasFeature="yes" pos="right" />
 
+    
         <FeatureCell>
           On-Chain Raffles
         </FeatureCell>
@@ -129,15 +131,15 @@ const TierTable = ({
           Prices per user
         </FeatureCell>
         <TableCell pos="left">
-          <p>&lt; 1k Users = $49/mo</p>
+          <p>&lt; 1k Users = $48/mo</p>
           <p>&lt; 3k Users = $69/mo</p>
-          <p>&lt; 7k Users = $89/mo</p>
-          <p>&gt; 7k Users = $110/mo</p>
+          <p>&lt; 7k Users = $88/mo</p>
+          <p>&gt; 7k Users = $111/mo</p>
         </TableCell>
         <TableCell pos="center">
-          <p>&lt; 1k Users = $97/mo</p>
-          <p>&lt; 3k Users = $127/mo</p>
-          <p>&lt; 7k Users = $149/mo</p>
+          <p>&lt; 1k Users = $98/mo</p>
+          <p>&lt; 3k Users = $128/mo</p>
+          <p>&lt; 7k Users = $148/mo</p>
           <p>&gt; 7k Users = $169/mo</p>
         </TableCell>
         <TableCell pos="right" >
