@@ -13,7 +13,7 @@ const ProjectPurposeTab: FC<InformationTabProps> = ({ information, setInformatio
   }
   return (
     <div>
-      <p className="text-lg mb-2">Why would you like to use the Boo Bot?</p>
+      <p className="text-lg mb-2">Why would you like to use the Boobot?</p>
       <Radio
         name="purpose"
         selected={information.purpose}

@@ -11,41 +11,41 @@ const FAQ = () => {
         <h3 className="text-4xl underline text-center mb-8">Have Any Questions?</h3>
         <div className=''>
           <FAQItem
-            question="What is Boo Bot?"
+            question="What is Boobot?"
             answer={<p>
-              Boo Bot is a discord bot built for Web3 projects.
+              Boobot is a discord bot built for Web3 projects.
               <br /> <br/>
               It enables project teams to create a community economy on Discord, where members can earn points through participation, complete bounties to earn more, and be rewarded for their loyalty.
               It's a tool that fosters active community engagement, streamlines project tasks, and automates rewards distribution.
             </p>}
           />
           <FAQItem
-            question="How do I install Boo Bot?"
+            question="How do I install Boobot?"
             answer={<p>
-              First, you need to select your preferred Boo Bot version and set up a payment plan.
-              Then, choose your desired blockchain (Solana, Near, Sui, or None) and click on the 'Install Boo Bot' button.
+              First, you need to select your preferred Boobot version and set up a payment plan.
+              Then, choose your desired blockchain (Solana, Near, Sui, or None) and click on the 'Install Boobot' button.
               This will guide you through the installation process on Discord.
             </p>}
           />
           <FAQItem
-            question="Can I change my Boo Bot version later?"
+            question="Can I change my Boobot version later?"
             answer={<p>
-              Yes, you can upgrade or downgrade your Boo Bot version later from within your account settings.
+              Yes, you can upgrade or downgrade your Boobot version later from within your account settings.
               <br/><br/>
               Please note, changes will be reflected from the next billing cycle.
             </p>}
           />
           <FAQItem
-            question="What is the Boo Bot affiliate program?"
+            question="What is the Boobot affiliate program?"
             answer={<p>
-              The Boo Bot affiliate program is an opportunity to earn rewards by referring others to Boo Bot.
+              The Boobot affiliate program is an opportunity to earn rewards by referring others to Boobot.
               <br/><br/>
               You can join during the onboarding process or later from your account.
-              When your friends subscribe to Boo Bot using your referral link, you earn 30% of their subscription or prepayment.
+              When your friends subscribe to Boobot using your referral link, you earn 30% of their subscription or prepayment.
             </p>}
           />
           <FAQItem
-            question="What if I encounter issues or need help with Boo Bot?"
+            question="What if I encounter issues or need help with Boobot?"
             answer={<p>
               We're here to help!
               <br/><br/>

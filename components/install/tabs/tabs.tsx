@@ -27,7 +27,7 @@ export interface Information {
   purposeOther: string | null;
 }
 
-export type Version = "Baby Boo Bot" | "Pro Boo Bot" | "Enterprise Boo Bot" | null
+export type Version = "Baby Boobot" | "Pro Boobot" | "Enterprise Boobot" | null
 
 export type ChainOptions = "Solana" | "Near" | "Sui" | "None" | null
 
@@ -107,7 +107,7 @@ const Tabs = () => {
   }
 
   const handleInstall = () => {
-    alert(`You have installed boo bot! this is all the info: ${JSON.stringify(getForm())}`)
+    alert(`You have installed Boobot! this is all the info: ${JSON.stringify(getForm())}`)
     console.log(getForm())
     // send form results to BE, recieve an invite Link
     const inviteLink = "https://www.google.com"
@@ -145,8 +145,8 @@ const Tabs = () => {
       button: "default",
     },
     {
-      heading: "Select Your Boo Bot",
-      description: "Pick the Boo Bot version that best suits your project's needs: Basic, Premium, or Complete.",
+      heading: "Select Your Boobot",
+      description: "Pick the Boobot version that best suits your project's needs: Basic, Premium, or Complete.",
       content: <VersionTab version={version} setVersion={handleSetVersion} />,
       check: () => Boolean(version),
       button: "default",
@@ -160,7 +160,7 @@ const Tabs = () => {
     },
     {
       heading: "Spread the Word and Earn Rewards",
-      description: "Invite friends to Boo Bot and earn 30% of their subscription or prepayment. Start now or later from your account.",
+      description: "Invite friends to Boobot and earn 30% of their subscription or prepayment. Start now or later from your account.",
       content: <ReferralsTab referrals={referrals} setReferrals={handleSetReferrals} />,
       check: () => true, //referals are optional
       button: "invite",
@@ -174,14 +174,14 @@ const Tabs = () => {
     },
     {
       heading: "Choose Your Chain and Install",
-      description: "Select the desired blockchain (Solana, Near, Sui, or None) and install the Boo Bot on Discord.",
+      description: "Select the desired blockchain (Solana, Near, Sui, or None) and install the Boobot on Discord.",
       content: <InstallTab blockchain={blockchain} setBlockchain={handleSetBlockchain} />,
       check: () => Boolean(blockchain),
       button: "install",
     },
     {
       heading: "Installation Complete!",
-      description: "Now we just need to use this link to invite your new Boo Bot to your server and follow a few simple steps",
+      description: "Now we just need to use this link to invite your new Boobot to your server and follow a few simple steps",
       content: <SetupTab inviteLink={inviteLink} />,
       check: () => Boolean(inviteLink),
       button: "none",
@@ -261,7 +261,7 @@ const Tabs = () => {
           {tabs[activeTabIndex].content}
         </div>
         <div className="flex justify-center gap-3 relative">
-          {(activeTabIndex > 0 && activeTabIndex >= tabs.length) ? (
+          {(activeTabIndex > 0 && activeTabIndex <= tabs.length) ? (
             <button
               className="text-neutral-300/50 text-sm font-medium hover:text-white duration-200 mr-4"
               onClick={() => handleSetActiveTabIndex(activeTabIndex > 0 ? activeTabIndex - 1 : 0)}

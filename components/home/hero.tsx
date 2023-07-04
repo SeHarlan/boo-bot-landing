@@ -8,7 +8,7 @@ const Hero = () => {
     <div id="landing" className="standardContainer min-h-screen flex flex-col items-center justify-center gap-6 text-center mb-20">
       <EntranceWrapper skipMountingScroll initTransClass={enteredTransClass}>
         <h1 className='text-5xl/[4rem] mb-6' data-text={titleText}>{titleText}</h1>
-        <p className='text-lg'>Automate rewards, boost engagement, and foster collaboration using Boo Bot</p>        
+        <p className='text-lg'>Automate rewards, boost engagement, and foster collaboration using Boobot</p>        
       </EntranceWrapper>
       <EntranceWrapper  skipMountingScroll initTransClass={enteredTransClass} className="mx-auto pt-2 md:pt-12">
 

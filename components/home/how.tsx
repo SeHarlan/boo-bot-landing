@@ -8,7 +8,7 @@ const How = () => {
   return (
     <div id="about" className="standardContainer mb-20 [scroll-margin:100px_!important]">
       <EntranceWrapper >
-        <h2 className="text-4xl underline text-center mb-8">How Boo Bot Works</h2>
+        <h2 className="text-4xl underline text-center mb-8">How Boobot Works</h2>
         <p className="text-lg text-center mb-20">Experience the next generation of <strong>web3 loyalty rewards</strong> - built on fairness and equality</p>
       </EntranceWrapper>
         
@@ -17,7 +17,7 @@ const How = () => {
           <Grid className="mt-1 flex-shrink-0" colorClass="fill-themeSkyBlue"/>
           <div>
             <h4 className="text-2xl text-themeSkyBlue">A Thriving Points Economy</h4>
-            <p>Boo Bot fosters a vibrant Discord, <strong>rewarding active members</strong> and fuelling the growth of thriving, engaged communities.</p>
+            <p>Boobot fosters a vibrant Discord, <strong>rewarding active members</strong> and fuelling the growth of thriving, engaged communities.</p>
           </div>
         </div>
       </EntranceWrapper>
@@ -37,7 +37,7 @@ const How = () => {
           <Grid className="mt-1 flex-shrink-0" colorClass="fill-themeSkyBlue" />
           <div>
             <h4 className="text-2xl text-themeSkyBlue">Automated Rewards for Contributors</h4>
-            <p><strong>Effortlessly distribute on-chain tokens & NFTs</strong> with Boo Bot’s automated airdrops, ensuring every deserving community member is rewarded.</p>
+            <p><strong>Effortlessly distribute on-chain tokens & NFTs</strong> with Boobot's automated airdrops, ensuring every deserving community member is rewarded.</p>
           </div>
         </div>
       </EntranceWrapper>

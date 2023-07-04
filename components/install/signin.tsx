@@ -41,7 +41,7 @@ const SignIn = () => {
         <div className="flex justify-center py-4">
           <Checkbox
             name="emails-ok"
-            options={[{ value: "yes", label: "I want cool Boo Bot related emails" }]}
+            options={[{ value: "yes", label: "I want cool Boobot related emails" }]}
             selected={allowEmail ? ["yes"] : []}
             setSelected={handleEmailAllowChange}
           />

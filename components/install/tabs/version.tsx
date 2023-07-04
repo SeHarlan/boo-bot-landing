@@ -23,7 +23,7 @@ const VersionTab: FC<VersionTabProps> = ({ version, setVersion }) => {
         name="version"
         selected={version}
         setSelected={(version) => setVersion(version as Version)}
-        options={makeOptions(["Baby Boo Bot", "Pro Boo Bot", "Enterprise Boo Bot"])}
+        options={makeOptions(["Baby Boobot", "Pro Boobot", "Enterprise Boobot"])}
       />
 
 

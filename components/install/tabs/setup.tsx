@@ -27,10 +27,10 @@ const SetupTab: FC<SetupTabProps> = ({ inviteLink }) => {
       </div>
 
       <h3 className={hClass}>2 - Initialize the server</h3>
-      <p className={pClass}>Use the /initializeserver command to create a server wallet and start the boo bot.</p>
+      <p className={pClass}>Use the /initializeserver command to create a server wallet and start the Boobot.</p>
 
       <h3 className={hClass}>3 - Configure the bot</h3>
-      <p className={pClass}>Use the /configserver and /configserverroles commands to setup the default channels & roles for the boo bot.</p>
+      <p className={pClass}>Use the /configserver and /configserverroles commands to setup the default channels & roles for the Boobot.</p>
 
       <h3 className={hClass}>4 - Play with the features!</h3>
       <p className={pClass}>We'd recommend playing around in a test server and then introducing to your community, along with a public announcement to display the main features you'd like your community to use.</p>

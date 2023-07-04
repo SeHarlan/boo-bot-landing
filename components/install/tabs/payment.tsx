@@ -18,7 +18,7 @@ const PaymentTab: FC<PaymentTabProps> = ({ version, information, setPaymentCompl
 
   const getStreamId = () => {
     switch (version) {
-      case "Baby Boo Bot": {
+      case "Baby Boobot": {
         switch (information.userCount) { 
           case "Less than 1k members": return "6499d742631c6e06518fe442";
           case "1k - 3k members": return "6499df1bf0b387eacaeca11b";
@@ -26,7 +26,7 @@ const PaymentTab: FC<PaymentTabProps> = ({ version, information, setPaymentCompl
           case "More than 7k members": return "6499df7b8854751bd8ad96c4";
         }
       }
-      case "Pro Boo Bot": {
+      case "Pro Boobot": {
         switch (information.userCount) { 
           case "Less than 1k members": return "6499dfabd4008f8cdbd63ffd";
           case "1k - 3k members": return "6499dfd550b7edfc5f29ecaa";
@@ -40,10 +40,10 @@ const PaymentTab: FC<PaymentTabProps> = ({ version, information, setPaymentCompl
   return (
 
     <div>
-      {version === "Enterprise Boo Bot"
+      {version === "Enterprise Boobot"
         ? (
           <div className="text-center text-2xl font-bold mb-4">
-            Please contact us at <a href="mailto:cap@boo.ventures">cap@boo.ventures</a> once you are done signing up.
+            Please set up a meeting with Cap <a className="underline" href="https://calendly.com/capuk/30min">here</a>
           </div>
         ) : (
           <HelioPay

@@ -17,15 +17,15 @@ const TierTable = ({
       >
         <div />
         <TableHeader pos="left">
-          <h4 className="font-bold">Baby Boo Bot</h4>
+          <h4 className="font-bold">Baby Boobot</h4>
           <p>Starting @ $49/mo</p>
         </TableHeader>
         <TableHeader pos="center">
-          <h4 className="font-bold">Pro Boo Bot</h4>
+          <h4 className="font-bold">Pro Boobot</h4>
           <p>Starting @ $97/mo</p>
         </TableHeader>
         <TableHeader pos="right">
-          <h4 className="font-bold">Enterprise Boo Bot</h4>
+          <h4 className="font-bold">Enterprise Boobot</h4>
           <p>Contact cap@boo.ventures</p>
         </TableHeader>
 
@@ -67,7 +67,7 @@ const TierTable = ({
         <TableCell hasFeature="yes" pos="right" />
 
         <FeatureCell>
-          Boo Bot Avatar Customisations
+          Boobot Avatar Customisations
         </FeatureCell>
         <TableCell hasFeature="no" pos="left" />
         <TableCell hasFeature="yes" pos="center" />
@@ -95,7 +95,7 @@ const TierTable = ({
         <TableCell hasFeature="yes" pos="right" />
 
         <FeatureCell>
-          Early Access to Boo Bot Upgrades
+          Early Access to Boobot Upgrades
         </FeatureCell>
         <TableCell hasFeature="no" pos="left" />
         <TableCell hasFeature="no" pos="center" />
