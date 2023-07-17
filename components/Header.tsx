@@ -9,6 +9,7 @@ import { signOut, useSession } from "next-auth/react";
 import Button from "./Button";
 import { User } from "@/app/api/auth/[...nextauth]/route";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import Link from "next/link";
 
 const Header: FC = () => {
   const router = useRouter()
@@ -18,6 +19,7 @@ const Header: FC = () => {
   const { clearForm } = useLocalStorage()
   
   const isHome = pathname === "/"
+  const isInstall = pathname === "/install"
 
   const handleScroll = (id: string) => {
 
@@ -39,7 +41,7 @@ const Header: FC = () => {
     signOut()
   }
 
-  const showSignOut = !isHome && Boolean(session)
+  const showSignOut = isInstall && Boolean(session)
 
   return (
     <div className="fixed top-0 left-0 w-full bg-themeBlack/70 shadow-lg z-30">
@@ -49,6 +51,12 @@ const Header: FC = () => {
           <h2 className="text-2xl hidden md:block">Boobot</h2>
         </button>
         <div className="flex gap-4">
+          <button className="hover:text-themeSkyBlue">
+            <Link href="/leaderboard">
+              <h3 className="text-xl underline">Leaderboard</h3>
+            </Link>
+          </button>
+
           <button onClick={() => handleScroll("about")} className="hover:text-themeSkyBlue">
             <h3 className="text-xl underline">Learn More</h3>
           </button>

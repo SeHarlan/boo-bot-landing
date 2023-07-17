@@ -185,7 +185,7 @@ const TableCell: FC<{ children?: ReactNode, hasFeature?: "yes" | "no", pos: "lef
   }
 
   return (
-    <div className="px-4  border-x border-collapse border-themeWhite/20 flex items-end">
+    <div className="px-4 border-x border-collapse border-themeWhite/20 flex items-end">
       <div className={clsx("-mb-[0.37rem] pb-[0.7rem] flex flex-col gap-2 justify-center items-center text-center w-full border-b", getCol())}>
         {getIcon()}
         {children}

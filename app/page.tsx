@@ -6,6 +6,7 @@ import How from '@/components/home/how'
 import Testimonials from '@/components/home/testimonials'
 import TierTable from '@/components/home/tierTable'
 import PaymentTab from '@/components/install/tabs/payment'
+import { TopFiveLeaderboard } from '@/components/leaderboard/fullLeaderboard'
 
 
 
@@ -13,6 +14,12 @@ export default function Home() {
   return (
     <main className='pb-36'>
       <Hero />
+      <EntranceWrapper className='standardContainer mb-40'>
+        <h2 className="text-4xl underline text-center mb-8">Community Leaderboard</h2>
+        <div className='overflow-x-auto'>
+          <TopFiveLeaderboard />
+        </div>
+      </EntranceWrapper>
       <How />
       <TierTable />
       <Testimonials />
