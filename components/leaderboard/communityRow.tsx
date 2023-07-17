@@ -19,7 +19,7 @@ const CommunityRow: FC<CommunityRowProps> = ({
   return (
     <>
       <CommunityCell>
-        <Image src={pfp} alt={`${serverName} profile picture`} width={64} height={64}
+        <img src={pfp} alt={`${serverName} profile picture`}
           className="
           flex-shrink-0
           w-16 h-16 rounded-full bg-neutral-800

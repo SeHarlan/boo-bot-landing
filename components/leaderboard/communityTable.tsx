@@ -10,7 +10,7 @@ const CommunityTable: FC<{ communityRows: CommunityRowProps[] }> = ({ communityR
       <p className="text-center text-xl py-4">Bounties Completed</p>
       <p className="text-center text-xl py-4">Raffle Tickets Sold</p>
       <p className="text-center text-xl py-4 text-themeSkyBlue font-bold">Total Points</p>
-      {communityRows.map((rowProps) => <CommunityRow {...rowProps} />)}
+      {communityRows.map((rowProps, index) => <CommunityRow key={"community-row-"+index} {...rowProps} />)}
     </div>
   )
 }

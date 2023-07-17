@@ -1,12 +1,8 @@
 "use client"
 
-import { HelioPay, HelioPayProps } from "@heliofi/react";
-import { FC, useEffect, useState } from "react"
+import { HelioPay } from "@heliofi/react";
+import { FC } from "react"
 import { Version, Information } from "./tabs";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import Button from "../../Button";
-import dynamic from "next/dynamic";
 
 interface PaymentTabProps {
   version: Version;
